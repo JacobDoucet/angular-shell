@@ -7,8 +7,8 @@ var cookieParser = require('cookie-parser');
 var expressSession = require('express-session');
 
 nconf.file({ file : __dirname + '/config/' + app.get('env') + '.json'});
-var serverPort = //nconf.get('serverPort');
-                  3000;
+var serverPort = nconf.get('serverPort');
+                //3000;
 
 app.use(bodyParser.urlencoded({
   extended : false
