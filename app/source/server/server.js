@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({
   extended : false
 }));
 
-app.use(cookieParser);
+app.use(cookieParser());
 
 app.use(expressSession({
   secret : 'secret',
@@ -22,12 +22,11 @@ app.use(expressSession({
   saveUninitialized : false
 }));
 
-app.get('/', function(req, res){
-  console.log("Hit default");
-  res.send("Helloooooo!");
-});
-
-app.use(express.static(__dirname + "web/assets"));
+app.use(express.static(__dirname.replace("\\>>server-path<<", "/>>app-path<<") + "/assets"));
+app.use("/", express.static(__dirname.replace("\\>>server-path<<", "/>>app-path<<")));
 
 app.listen(serverPort)
-console.log("APP (env : " + app.get('env') + ") listening on port " + serverPort);
+console.log(">>app-name<<");
+console.log("   -listening on port : " + serverPort);
+console.log("   -environment       : " + app.get('env'));
+console.log("   -directory         : " + __dirname);
